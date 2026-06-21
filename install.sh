@@ -34,9 +34,9 @@ COUNT=$(find "$SRC" -maxdepth 1 -mindepth 1 -type d | wc -l | tr -d ' ')
 echo "⬇️  Копирую $COUNT скиллов…"
 
 if command -v rsync >/dev/null 2>&1; then
-  rsync -a "$SRC"/ "$DEST"/
+  rsync -aL "$SRC"/ "$DEST"/
 else
-  cp -R "$SRC"/. "$DEST"/
+  cp -RL "$SRC"/. "$DEST"/
 fi
 
 echo "✅ Готово. Установлено скиллов: $COUNT"

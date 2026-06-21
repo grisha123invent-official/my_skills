@@ -1188,7 +1188,7 @@ Disciplined diagnosis loop для **сложных багов и performance р�
 
 **Особый режим:** perf-ветка с baseline → bisect для регрессий производительности.
 
-**Когда вызвать:** SaaS-проект LiveKit падает на конкретной комбинации параметров; Masha-бот теряет голосовое сообщение; AI_Brain wiki-compile зависает на конкретном топике.
+**Когда вызвать:** Polyly LiveKit падает на конкретной комбинации параметров; Masha-бот теряет голосовое сообщение; AI_Brain wiki-compile зависает на конкретном топике.
 
 ---
 
@@ -1206,7 +1206,7 @@ Throwaway-прототипирование с **routing на 2 ветки**: т�
 - 7-шаговый процесс: spec state shape → pure reducer → 5+ tests → wire to terminal → run → iterate → archive
 - Anti-patterns: не мешать render с logic, не использовать globals, не пропускать tests
 - Hatchery: pnpm/python/bun/Make/just/pyproject — tooling-agnostic
-- Используется для: state-машин SaaS-проект (звонок: ringing → connected → ended → archived), Маша-бот inline-кнопок (post → approve/reject/iterate → posted), AI_Brain ingest flow
+- Используется для: state-машин Polyly (звонок: ringing → connected → ended → archived), Маша-бот inline-кнопок (post → approve/reject/iterate → posted), AI_Brain ingest flow
 
 **Branch UI (multiple variants):**
 - 3 радикально разных варианта на одном роуте через `?variant=A|B|C`
@@ -1214,11 +1214,11 @@ Throwaway-прототипирование с **routing на 2 ветки**: т�
 - Floating switcher overlay для быстрого переключения
 - В dev-mode виден, в prod off через `process.env.NODE_ENV`
 - Anti-patterns: не оставлять прототип в prod, не делать варианты «почти одинаковые», не использовать prototype как финальный UI
-- Используется для: проект-кафе admin экранов (3 разных KDS-layout одновременно), SaaS-проект лендинг hero вариантов
+- Используется для: BigBoss admin экранов (3 разных KDS-layout одновременно), Polyly лендинг hero вариантов
 
 **Триггеры:** «prototype this», «let me play with it», «try a few designs», «sanity-check state machine», «mock up UI», «explore options»
 
-**Что вводить:** brief того что прототипируем + контекст (LOGIC или UI ветка) + домен (SaaS-проект/проект-кафе/AI_Brain/etc)
+**Что вводить:** brief того что прототипируем + контекст (LOGIC или UI ветка) + домен (Polyly/BigBoss/AI_Brain/etc)
 
 **Отличие от hallmark/frontend-design:** prototype = throwaway exploration ДО финального решения. Hallmark = финальный production UI с anti-slop. Совместимы: prototype выбирает направление → hallmark/frontend-design делает финал.
 
@@ -1451,7 +1451,7 @@ Throwaway-прототипирование с **routing на 2 ветки**: т�
 **Что вводит:** target URL/API + load profile (smoke/load/stress/spike/soak)
 **Что выдаёт:** k6 test script (JS), thresholds, CI/CD integration
 **Quick run:** `k6 run simple-test.js`
-**Отличие от уже установленных:** компаньон `ag-performance-engineer`. Не пересекается с `ag-playwright-skill` (тот — UI flows, этот — load patterns). Используй для SaaS-проект load testing, Masha-bot stress tests.
+**Отличие от уже установленных:** компаньон `ag-performance-engineer`. Не пересекается с `ag-playwright-skill` (тот — UI flows, этот — load patterns). Используй для Polyly load testing, Masha-bot stress tests.
 
 ---
 
@@ -1469,7 +1469,7 @@ Throwaway-прототипирование с **routing на 2 ветки**: т�
 **Триггеры:** «Dockerfile», «multi-stage build», «docker compose», «image size», «container security», «.dockerignore», «base image selection», «container production»
 **Pipeline:** detect docker version/structure → identify problem category → apply strategy → validate (build + scout scan + runtime check + compose config)
 **Capabilities:** Dockerfile optimization, multi-stage builds, security hardening, image size reduction, orchestration patterns
-**Отличие от уже установленных:** не пересекается ни с чем. Полезен для Masha-bot deployment, SaaS-проект Fly.io контейнеров. Композируется с `ag-cloud-architect`/`ag-gcp-cloud-run`.
+**Отличие от уже установленных:** не пересекается ни с чем. Полезен для Masha-bot deployment, Polyly Fly.io контейнеров. Композируется с `ag-cloud-architect`/`ag-gcp-cloud-run`.
 
 ### ag-firebase
 **Тип:** Instruction-only (vibeship-spawner-skills)
@@ -1477,7 +1477,7 @@ Throwaway-прототипирование с **routing на 2 ветки**: т�
 **Capabilities:** firebase-auth, firestore, realtime-database, cloud-functions, storage, hosting, security-rules, admin-sdk, emulators
 **Key insight:** «Firestore optimized for read-heavy denormalized data. Design for queries, not relationships.»
 **Что выдаёт:** modular SDK imports, security rules, denormalization patterns, batch writes
-**Отличие от уже установленных:** альтернатива `supabase` skill для Firebase стэка. Не пересекается. Полезно если клиент уже на Firebase (проект-кафе MVP?).
+**Отличие от уже установленных:** альтернатива `supabase` skill для Firebase стэка. Не пересекается. Полезно если клиент уже на Firebase (Big Boss MVP?).
 
 ### ag-gcp-cloud-run
 **Тип:** Instruction-only (vibeship-spawner-skills)
@@ -1574,12 +1574,12 @@ Throwaway-прототипирование с **routing на 2 ветки**: т�
 - `mkt-autoresearch` — оптимизирует контент, **не про идеи**
 - `kp-startup-pressure-test` — **уникальный** оценщик через Paul Graham фреймворк
 
-**Идеальные use-cases для пользователя:**
-- **проект-кафе** — pressure-test до франшизы
-- **SaaS-проект** — product-market fit voice translator
-- **Любая новая идея** пользователя
-- **маркетинг-проект** — оценка клиентских стартапов
-- **клубный проект (клуб Дениса)** — оценка идей резидентов на потоке
+**Идеальные use-cases для Гриши:**
+- **BigBoss** — pressure-test до франшизы
+- **Polyly** — product-market fit voice translator
+- **Любая новая идея** Гриши
+- **Vios** — оценка клиентских стартапов
+- **Основатели (клуб Дениса)** — оценка идей резидентов на потоке
 
 **Pipeline для оценки идеи:**
 1. (опционально) `eng-interview-me` → вытащить точное описание идеи
@@ -1604,7 +1604,7 @@ Throwaway-прототипирование с **routing на 2 ветки**: т�
 **Триггеры:** «capture this», «структурировать мысли», «расшифрованное голосовое в структуру», «brain dump»
 **Что вводить:** длинная сырая запись (голосовая транскрипция, поток мыслей, длинный комментарий)
 **Что выходит:** 4 секции — что/почему/действия/открытые вопросы
-**Когда:** пользователь → голосовое → Whisper → текст → ar-productivity-capture → structured doc в `raw/capture/`
+**Когда:** Гриша → голосовое → Whisper → текст → ar-productivity-capture → structured doc в `raw/capture/`
 
 ## ar-productivity-reflect
 **Назначение:** Mid-conversation pause. Детектирует bias (sunk cost, anchoring, confirmation), выдаёт вердикт **Continue / Pivot / Pause** + 3 next steps.
@@ -1669,7 +1669,7 @@ Throwaway-прототипирование с **routing на 2 ветки**: т�
 | Проверить маркетинг-текст на юр.корректность (неподтв. заявления, реклама) до публикации | `marketing-claims-review` ⚠️ ставится из сети (Anthropic офиц.) |
 | Согласование сделки/скидки/условий, маржа с учётом скидки | `ar-deal-desk` / `deal-desk` — GO/NO-GO + эскалация |
 
-> **Для проект-кафе:** `general-counsel-advisor` → оферта Boss Lite, договоры франшизы/Boss Studio. `marketing-claims-review` → тексты «AI снижает списания на X%» (закон о рекламе). `gdpr-audit-prep` → хранение данных клиентов кафе (152-ФЗ мышление). `legal-risk-assessment` → риск-профиль перед франшизой.
+> **Для BigBoss:** `general-counsel-advisor` → оферта Boss Lite, договоры франшизы/Boss Studio. `marketing-claims-review` → тексты «AI снижает списания на X%» (закон о рекламе). `gdpr-audit-prep` → хранение данных клиентов кафе (152-ФЗ мышление). `legal-risk-assessment` → риск-профиль перед франшизой.
 
 ## Не установлены и почему (321 скилл из репо в бэкапе НЕ активны)
 - `marketing/`, `marketing-skill/` (45+) — полный overlap с 21× mkt-* + 25× seo-* + content-strategy
@@ -1678,6 +1678,6 @@ Throwaway-прототипирование с **routing на 2 ветки**: т�
 - `business-growth/` (5) — overlap с mkt-sales-* / mkt-revenue-intelligence
 - `c-level-advisor/` остальные 23 advisor роли (cto-/cmo-/cfo-/coo-) — reference глоссарии без agent surface
 - `ra-qm-team/` (16) — медицинская QMS, не наш домен
-- `research/dossier`, `research/pulse` — пользователь отказался ставить (но в бэкапе)
+- `research/dossier`, `research/pulse` — Гриша отказался ставить (но в бэкапе)
 
 В бэкапе на vault'е: только 8 установленных + README + LICENSE (на случай если кто-то понадобится позже). Полный репо клонирован локально: `~/Documents/skills-external/alirezarezvani-claude-skills/`.
