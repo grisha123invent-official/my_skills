@@ -1188,7 +1188,7 @@ Disciplined diagnosis loop для **сложных багов и performance р�
 
 **Особый режим:** perf-ветка с baseline → bisect для регрессий производительности.
 
-**Когда вызвать:** Polyly LiveKit падает на конкретной комбинации параметров; Masha-бот теряет голосовое сообщение; AI_Brain wiki-compile зависает на конкретном топике.
+**Когда вызвать:** realtime-сервис падает на конкретной комбинации параметров; бот теряет сообщение; пайплайн зависает на конкретном входе.
 
 ---
 
@@ -1206,7 +1206,7 @@ Throwaway-прототипирование с **routing на 2 ветки**: т�
 - 7-шаговый процесс: spec state shape → pure reducer → 5+ tests → wire to terminal → run → iterate → archive
 - Anti-patterns: не мешать render с logic, не использовать globals, не пропускать tests
 - Hatchery: pnpm/python/bun/Make/just/pyproject — tooling-agnostic
-- Используется для: state-машин Polyly (звонок: ringing → connected → ended → archived), Маша-бот inline-кнопок (post → approve/reject/iterate → posted), AI_Brain ingest flow
+- Используется для: state-машин (звонок: ringing → connected → ended → archived), inline-кнопок бота (draft → approve/reject/iterate → posted), ingest-флоу
 
 **Branch UI (multiple variants):**
 - 3 радикально разных варианта на одном роуте через `?variant=A|B|C`
@@ -1214,11 +1214,11 @@ Throwaway-прототипирование с **routing на 2 ветки**: т�
 - Floating switcher overlay для быстрого переключения
 - В dev-mode виден, в prod off через `process.env.NODE_ENV`
 - Anti-patterns: не оставлять прототип в prod, не делать варианты «почти одинаковые», не использовать prototype как финальный UI
-- Используется для: BigBoss admin экранов (3 разных KDS-layout одновременно), Polyly лендинг hero вариантов
+- Используется для: admin-экранов (несколько разных layout одновременно), лендинг hero-вариантов
 
 **Триггеры:** «prototype this», «let me play with it», «try a few designs», «sanity-check state machine», «mock up UI», «explore options»
 
-**Что вводить:** brief того что прототипируем + контекст (LOGIC или UI ветка) + домен (Polyly/BigBoss/AI_Brain/etc)
+**Что вводить:** brief того что прототипируем + контекст (LOGIC или UI ветка) + домен (твой проект)
 
 **Отличие от hallmark/frontend-design:** prototype = throwaway exploration ДО финального решения. Hallmark = финальный production UI с anti-slop. Совместимы: prototype выбирает направление → hallmark/frontend-design делает финал.
 
@@ -1230,7 +1230,7 @@ Throwaway-прототипирование с **routing на 2 ветки**: т�
 
 | Skill | Категория | Почему пропущен |
 |---|---|---|
-| `obsidian-vault` | personal | Хардкод чужого пути `/mnt/d/Obsidian Vault/`, примитивно для AI_Brain архитектуры |
+| `obsidian-vault` | personal | Хардкод чужого пути `/mnt/d/Obsidian Vault/`, слишком примитивно |
 | `zoom-out` | engineering | 430 байт — буквально одна фраза-промпт. Не скилл |
 | `caveman` | productivity | Конфликт со стилем общения (русский, развёрнутый — против EN sжатия 75%) |
 | `edit-article` | personal | Слабее `mkt-content-ops`/`mkt-x-longform-post`; правило «240 chars» ломает русский стиль |
@@ -1249,7 +1249,7 @@ Throwaway-прототипирование с **routing на 2 ветки**: т�
 | `scaffold-exercises` | misc | Узкое (для TS-курсов) |
 | `setup-pre-commit` | misc | Стандартная задача без нужды в скилле |
 
-Если в будущем что-то понадобится — все 15 пропущенных файлов есть в Obsidian-бэкапе по адресу `library/skills/mattpocock-skills-bundle/_repo/skills/`.
+Если в будущем что-то понадобится — все 15 пропущенных файлов есть в исходном репозитории `mattpocock/skills`.
 
 ---
 
@@ -1370,7 +1370,7 @@ Throwaway-прототипирование с **routing на 2 ветки**: т�
 **Покрывает:** OpenAI response_format, Anthropic tool_use, Google Gemini schema
 **Что вводит:** schema (JSON Schema / Pydantic / Zod) + prompt
 **Что выдаёт:** reliable typed JSON / enums / objects
-**Отличие от уже установленных:** не пересекается с `claude-api` (тот про caching/migration, этот про вытаскивание structured data из любого LLM). Полезен для Masha-бота (структурированные ответы для inline buttons), library indexers.
+**Отличие от уже установленных:** не пересекается с `claude-api` (тот про caching/migration, этот про вытаскивание structured data из любого LLM). Полезен для ботов (структурированные ответы для inline-кнопок) и индексаторов.
 
 ### ag-llm-prompt-optimizer
 **Тип:** Instruction-only (RSCIT framework)
@@ -1397,13 +1397,13 @@ Throwaway-прототипирование с **routing на 2 ветки**: т�
 **Триггеры:** «LangGraph», «stateful agent», «multi-actor», «graph topology», «checkpointer», «human-in-the-loop», «conditional routing»
 **Что выдаёт:** StateGraph code, reducers (add_messages), conditional edges, persistence через checkpointers, HITL patterns
 **Production usage:** LinkedIn, Uber, 400+ companies
-**Отличие от уже установленных:** более production-ready подход чем `ag-langchain-architecture` для agents. Полезен для AI_Brain auto-router'ов (qa-agent с multi-step reasoning) и Masha bot inline-button state machines. Композируется с `ag-langfuse` для observability.
+**Отличие от уже установленных:** более production-ready подход чем `ag-langchain-architecture` для agents. Полезен для auto-router'ов (multi-step reasoning) и bot inline-button state-машин. Композируется с `ag-langfuse` для observability.
 
 ### ag-langfuse
 **Тип:** Instruction-only (LLM observability)
 **Триггеры:** «Langfuse», «LLM tracing», «prompt versioning», «trace LLM calls», «cost tracking LLM», «monitor production AI», «debug agent runs»
 **Что выдаёт:** Langfuse SDK setup, trace/span/generation structure, integration с LangChain/LlamaIndex/OpenAI/Anthropic/Vercel AI SDK
-**Отличие от уже установленных:** уникальный observability layer; композируется с `ag-llm-app-patterns`, `ag-langchain-architecture`, `ag-langgraph`, `ag-llm-evaluation`. Полезен для production AI_Brain/Masha мониторинга после переноса на Mac mini.
+**Отличие от уже установленных:** уникальный observability layer; композируется с `ag-llm-app-patterns`, `ag-langchain-architecture`, `ag-langgraph`, `ag-llm-evaluation`. Полезен для production-мониторинга LLM-приложений и ботов.
 
 ---
 
@@ -1451,7 +1451,7 @@ Throwaway-прототипирование с **routing на 2 ветки**: т�
 **Что вводит:** target URL/API + load profile (smoke/load/stress/spike/soak)
 **Что выдаёт:** k6 test script (JS), thresholds, CI/CD integration
 **Quick run:** `k6 run simple-test.js`
-**Отличие от уже установленных:** компаньон `ag-performance-engineer`. Не пересекается с `ag-playwright-skill` (тот — UI flows, этот — load patterns). Используй для Polyly load testing, Masha-bot stress tests.
+**Отличие от уже установленных:** компаньон `ag-performance-engineer`. Не пересекается с `ag-playwright-skill` (тот — UI flows, этот — load patterns). Используй для load testing сервисов и stress-тестов ботов.
 
 ---
 
@@ -1469,7 +1469,7 @@ Throwaway-прототипирование с **routing на 2 ветки**: т�
 **Триггеры:** «Dockerfile», «multi-stage build», «docker compose», «image size», «container security», «.dockerignore», «base image selection», «container production»
 **Pipeline:** detect docker version/structure → identify problem category → apply strategy → validate (build + scout scan + runtime check + compose config)
 **Capabilities:** Dockerfile optimization, multi-stage builds, security hardening, image size reduction, orchestration patterns
-**Отличие от уже установленных:** не пересекается ни с чем. Полезен для Masha-bot deployment, Polyly Fly.io контейнеров. Композируется с `ag-cloud-architect`/`ag-gcp-cloud-run`.
+**Отличие от уже установленных:** не пересекается ни с чем. Полезен для deployment ботов и контейнеров на Fly.io/в облаке. Композируется с `ag-cloud-architect`/`ag-gcp-cloud-run`.
 
 ### ag-firebase
 **Тип:** Instruction-only (vibeship-spawner-skills)
@@ -1574,12 +1574,11 @@ Throwaway-прототипирование с **routing на 2 ветки**: т�
 - `mkt-autoresearch` — оптимизирует контент, **не про идеи**
 - `kp-startup-pressure-test` — **уникальный** оценщик через Paul Graham фреймворк
 
-**Идеальные use-cases для Гриши:**
-- **BigBoss** — pressure-test до франшизы
-- **Polyly** — product-market fit voice translator
-- **Любая новая идея** Гриши
-- **Vios** — оценка клиентских стартапов
-- **Основатели (клуб Дениса)** — оценка идей резидентов на потоке
+**Идеальные use-cases:**
+- **Новый продукт** — pressure-test до запуска/масштабирования
+- **Поиск product-market fit** для текущего проекта
+- **Любая новая идея** — быстрый reality-check
+- **Оценка чужих стартапов** (инвестор / консультант / акселератор)
 
 **Pipeline для оценки идеи:**
 1. (опционально) `eng-interview-me` → вытащить точное описание идеи
@@ -1604,7 +1603,7 @@ Throwaway-прототипирование с **routing на 2 ветки**: т�
 **Триггеры:** «capture this», «структурировать мысли», «расшифрованное голосовое в структуру», «brain dump»
 **Что вводить:** длинная сырая запись (голосовая транскрипция, поток мыслей, длинный комментарий)
 **Что выходит:** 4 секции — что/почему/действия/открытые вопросы
-**Когда:** Гриша → голосовое → Whisper → текст → ar-productivity-capture → structured doc в `raw/capture/`
+**Когда:** голосовое → Whisper → текст → ar-productivity-capture → structured doc в твою базу заметок
 
 ## ar-productivity-reflect
 **Назначение:** Mid-conversation pause. Детектирует bias (sunk cost, anchoring, confirmation), выдаёт вердикт **Continue / Pivot / Pause** + 3 next steps.
@@ -1651,7 +1650,7 @@ Throwaway-прототипирование с **routing на 2 ветки**: т�
 | Задача | Скилл + порядок |
 |---|---|
 | Оценить новую идею | `kp-startup-pressure-test` (Paul Graham) + `ar-productivity-andreessen` (Marc Andreessen) — double-check |
-| Структурировать голосовое в записи | Whisper → `ar-productivity-capture` → save in `raw/capture/` |
+| Структурировать голосовое в записи | Whisper → `ar-productivity-capture` → save в базу заметок |
 | Застрял, не понимаю что дальше | `ar-productivity-reflect` → Continue/Pivot/Pause |
 | Документировать чужой код | `ar-code-to-prd` → PRD → `eng-spec-driven-development` если нужны изменения |
 | Self-check founder bottleneck | `ar-founder-coach` ежемесячно |
@@ -1659,7 +1658,7 @@ Throwaway-прототипирование с **routing на 2 ветки**: т�
 | SaaS unit economics review | `ar-saas-metrics-coach` для SaaS-метрик; `mkt-finance-ops` для P&L |
 | B2B контракт оценить | `ar-deal-desk` (= `deal-desk`) GO/NO-GO + landmines |
 
-## Quick routing — legal / compliance edition (установлено 2026-05-28)
+## Quick routing — legal / compliance edition
 
 | Задача | Скилл + что делает |
 |---|---|
@@ -1669,7 +1668,7 @@ Throwaway-прототипирование с **routing на 2 ветки**: т�
 | Проверить маркетинг-текст на юр.корректность (неподтв. заявления, реклама) до публикации | `marketing-claims-review` ⚠️ ставится из сети (Anthropic офиц.) |
 | Согласование сделки/скидки/условий, маржа с учётом скидки | `ar-deal-desk` / `deal-desk` — GO/NO-GO + эскалация |
 
-> **Для BigBoss:** `general-counsel-advisor` → оферта Boss Lite, договоры франшизы/Boss Studio. `marketing-claims-review` → тексты «AI снижает списания на X%» (закон о рекламе). `gdpr-audit-prep` → хранение данных клиентов кафе (152-ФЗ мышление). `legal-risk-assessment` → риск-профиль перед франшизой.
+> **Пример (бизнес с франшизой / обработкой ПДн):** `general-counsel-advisor` → оферта и договоры. `marketing-claims-review` → рекламные тексты с цифрами (закон о рекламе). `gdpr-audit-prep` → хранение клиентских данных (GDPR / 152-ФЗ). `legal-risk-assessment` → риск-профиль перед запуском.
 
 ## Не установлены и почему (321 скилл из репо в бэкапе НЕ активны)
 - `marketing/`, `marketing-skill/` (45+) — полный overlap с 21× mkt-* + 25× seo-* + content-strategy
@@ -1678,6 +1677,6 @@ Throwaway-прототипирование с **routing на 2 ветки**: т�
 - `business-growth/` (5) — overlap с mkt-sales-* / mkt-revenue-intelligence
 - `c-level-advisor/` остальные 23 advisor роли (cto-/cmo-/cfo-/coo-) — reference глоссарии без agent surface
 - `ra-qm-team/` (16) — медицинская QMS, не наш домен
-- `research/dossier`, `research/pulse` — Гриша отказался ставить (но в бэкапе)
+- `research/dossier`, `research/pulse` — не включены в этот набор
 
 В бэкапе на vault'е: только 8 установленных + README + LICENSE (на случай если кто-то понадобится позже). Полный репо клонирован локально: `~/Documents/skills-external/alirezarezvani-claude-skills/`.
