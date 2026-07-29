@@ -1,3 +1,9 @@
+---
+name: growth-engine
+description: >-
+  Autonomous growth experimentation (Karpathy-style autoresearch for marketing): create experiments with hypotheses, collect data, run statistical analysis, auto-promote winners to a living playbook, and suggest what to test next. Use for running and managing marketing experiments and A/B programs.
+---
+
 # Growth Engine
 
 ## Preamble (runs on skill start)

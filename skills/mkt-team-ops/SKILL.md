@@ -1,3 +1,9 @@
+---
+name: team-ops
+description: >-
+  Team-optimization tools: a structured performance-audit framework (the 'Elon Algorithm') and a meeting-transcript processor that captures action items. Use for team performance audits and turning meeting transcripts into tracked action items.
+---
+
 # AI Team Ops
 
 ## Preamble (runs on skill start)

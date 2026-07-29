@@ -1,3 +1,9 @@
+---
+name: revenue-intelligence
+description: >-
+  Revenue-intelligence suite connecting sales calls, content performance, and closed deals. Pulls from Gong, GA4, HubSpot, and Ahrefs to answer 'what content drove revenue?' and 'what are prospects saying on calls?'. Use for content-ROI proof, call intelligence, and automated client reports.
+---
+
 # AI Revenue Intelligence
 
 ## Preamble (runs on skill start)

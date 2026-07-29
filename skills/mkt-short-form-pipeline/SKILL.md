@@ -1,3 +1,9 @@
+---
+name: short-form-pipeline
+description: >-
+  Extract viral short-form clips (TikTok, Reels, Shorts) from long-form YouTube: download, transcribe, AI-segment, cut, crop to vertical 9:16, and burn TikTok-style captions. Use to turn a long episode into 3-5 platform-ready vertical clips.
+---
+
 # Short-Form Video Clip Pipeline — Skill
 
 ## Preamble (runs on skill start)

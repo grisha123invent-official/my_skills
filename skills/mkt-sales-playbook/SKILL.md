@@ -1,3 +1,9 @@
+---
+name: sales-playbook
+description: >-
+  Value-based pricing and deal-upselling framework for B2B services: pre-call competitive briefings, tiered package generation, post-call analysis, and a pattern library for training sales teams. Use to price on value instead of discounting and to upsell existing deals.
+---
+
 # AI Sales Playbook — Value-Based Pricing & Deal Upselling
 
 ## Preamble (runs on skill start)

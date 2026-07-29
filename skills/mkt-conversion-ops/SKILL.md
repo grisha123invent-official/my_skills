@@ -1,3 +1,9 @@
+---
+name: conversion-ops
+description: >-
+  Turn landing pages into conversion machines and survey data into lead magnets. Scores pages across 8 conversion dimensions and converts raw survey responses into segmented lead-magnet strategies — no API keys or headless browsers. Use for CRO audits, landing-page optimization, and survey-to-lead-magnet work.
+---
+
 # AI Conversion Ops
 
 ## Preamble (runs on skill start)

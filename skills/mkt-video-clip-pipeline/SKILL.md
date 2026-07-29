@@ -1,3 +1,9 @@
+---
+name: video-clip-pipeline
+description: >-
+  Long-form video clip pipeline: downloads YouTube videos, transcribes locally with Whisper, uses Claude to pick the best standalone segments, and cuts them with FFmpeg. Use to turn full episodes into 3-5 highlight clips ready to upload.
+---
+
 # Long-Form Video Clip Pipeline
 
 ## Preamble (runs on skill start)

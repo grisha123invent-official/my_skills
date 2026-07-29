@@ -1,3 +1,9 @@
+---
+name: seo-ops
+description: >-
+  SEO operations suite: keyword research, competitor gap analysis, content briefing, and trend detection. Pulls from Google Search Console, Ahrefs, and the open web to surface ranked, confidence-scored opportunities. Use to find keyword gaps competitors missed and build an SEO action list.
+---
+
 # AI SEO Ops
 
 ## Preamble (runs on skill start)
